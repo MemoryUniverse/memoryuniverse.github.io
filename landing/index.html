@@ -1,16 +1,26 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Memory Universe — your team and its agents, working from the same decisions</title>
-<meta name="description" content="Keep the agents and sessions your team already uses. Memory Universe carries the decisions, rules and hard-won edge cases between them, so the next person can continue the work without another long document, recap meeting, or repeated mistake.">
+<title>Memory Universe — team memory for people and AI agents</title>
+<meta name="description" content="A shared memory and context layer for teams and the AI agents they use. Work carries across sessions, agents and devices — and private context stays private.">
 <link rel="canonical" href="https://memoryuniverse.github.io/landing/">
 <meta property="og:title" content="Memory Universe">
 <meta property="og:description" content="Your team and its agents, working from the same decisions.">
 <meta property="og:url" content="https://memoryuniverse.github.io/landing/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://memoryuniverse.github.io/landing/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Memory Universe">
+<meta property="og:site_name" content="Memory Universe">
+<meta name="twitter:title" content="Memory Universe — team memory for people and AI agents">
+<meta name="twitter:description" content="A shared memory and context layer for teams and the AI agents they use.">
+<meta name="twitter:image" content="https://memoryuniverse.github.io/landing/og.png">
+<meta name="theme-color" content="#181D24">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="mu.css">
 <link rel="stylesheet" href="mu-motion.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23181D24'/%3E%3Cmask id='m'%3E%3Crect x='14' y='14' width='50' height='50' fill='%23fff'/%3E%3Crect x='44' y='44' width='45' height='45' fill='%23000' stroke='%23fff' stroke-width='10'/%3E%3C/mask%3E%3Crect width='100' height='100' fill='%23DDE4EC' mask='url(%23m)'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://memoryuniverse.github.io/landing/#org","name":"Memory Universe","url":"https://memoryuniverse.github.io/landing/","logo":"https://memoryuniverse.github.io/landing/og.png","sameAs":["https://github.com/MemoryUniverse"],"description":"A shared memory and context layer for teams of people and the AI agents they use."},{"@type":"WebSite","@id":"https://memoryuniverse.github.io/landing/#site","name":"Memory Universe","url":"https://memoryuniverse.github.io/landing/","publisher":{"@id":"https://memoryuniverse.github.io/landing/#org"},"inLanguage":"en"},{"@type":"SoftwareApplication","@id":"https://memoryuniverse.github.io/landing/#app","name":"Memory Universe","applicationCategory":"DeveloperApplication","applicationSubCategory":"AI agent memory and context layer","operatingSystem":"macOS, Linux, Windows","url":"https://memoryuniverse.github.io/landing/","publisher":{"@id":"https://memoryuniverse.github.io/landing/#org"},"description":"A shared memory and context layer for teams and their AI agents. Work carries across sessions, agents and devices; private context stays on the plane you choose.","featureList":["Shared team memory across sessions","Works across AI agent vendors (Claude Code, Codex, any MCP client)","Automatic capture and context injection via host lifecycle hooks","MCP servers for both the local and shared planes","Governed sharing with attribution, expiry and revocation","Private memory kept on the plane you choose","Workspace rules every member's agent can read","Per-person persona shaping answers without changing the facts","Multi-device sync for one user"],"softwareHelp":{"@type":"CreativeWork","url":"https://github.com/MemoryUniverse"},"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/PreOrder","description":"Free private beta. Not generally available."},"releaseNotes":"Under development. The local memory engine, capture client and Python/TypeScript SDKs are built; shared rooms, governed transfer, revocation and the hosted coordination plane are in development for private beta."},{"@type":"FAQPage","@id":"https://memoryuniverse.github.io/landing/#faq","mainEntity":[{"@type":"Question","name":"What is Memory Universe?","acceptedAnswer":{"@type":"Answer","text":"Memory Universe is a shared memory and context layer for teams of people and the AI agents they use. Each session — a person working with their agent, or several people and several agents together — keeps its own memory, and the parts worth keeping move between sessions deliberately. The result is that the next person, or the next agent, starts from what the project already knows instead of an empty prompt."}},{"@type":"Question","name":"How is this different from the memory my AI agent already has?","acceptedAnswer":{"@type":"Answer","text":"Built-in agent memory usually ends at one user, one agent, or one vendor. It remembers your conversation for you. It cannot show a teammate what you decided, and it does not travel when that teammate works in a different agent. Memory Universe is memory for the workspace rather than for one chat: many people, many agents, many sessions, with attribution on every shared item and a boundary around what stays private."}},{"@type":"Question","name":"Which AI agents and coding assistants does it work with?","acceptedAnswer":{"@type":"Answer","text":"Claude Code and Codex CLI are the first integrations, and they use each host's own lifecycle hooks — so capture and context injection happen without the agent spending a turn calling a memory tool. Claude Desktop and any other MCP client can connect through the MCP surface. More hosts are planned, and the SDKs are there for anything else."}},{"@type":"Question","name":"Does it support MCP (Model Context Protocol)?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both planes are exposed as MCP servers, so any MCP client can read and write memory as a standard tool. MCP is also the integration path for hosts that do not expose hooks."}},{"@type":"Question","name":"Where is my private memory actually stored?","acceptedAnswer":{"@type":"Answer","text":"That is a choice, and the honest answer depends on which mode you run. In full-local the authoritative private store stays on your own machine and the coordination server holds no connection string to it. In hybrid your machine stays primary with a hosted mirror so your other devices stay current. In the thin client mode private memory sits in an isolated, server-readable partition. We do not currently offer an end-to-end-encrypted hosted tier, and we would rather say so than imply a guarantee the architecture does not make."}},{"@type":"Question","name":"Do I need a team, or is it useful on my own?","acceptedAnswer":{"@type":"Answer","text":"It is useful alone. The moment you own a second device, your laptop and your phone should not become two conflicting versions of your own memory — that is the same coordination problem a team has, at a smaller scale. The team features sit on top of the same machinery."}},{"@type":"Question","name":"Is it open source?","acceptedAnswer":{"@type":"Answer","text":"The engine is. mu-core (the complete memory engine and the contracts), mu-client (the local daemon and host integrations) and the Python and TypeScript SDKs are Apache-2.0 and public on GitHub. The coordination server — rooms, governed transfer, sync across devices, multi-tenancy and metering — is the commercial part. Full-local is meant to be a good system on its own, not a reduced edition."}},{"@type":"Question","name":"How does something get shared? Do I have to tag it?","acceptedAnswer":{"@type":"Answer","text":"You say it. When work reaches something worth keeping, you tell the agent you are already talking to — “make context of this and promote it” — and it distils the recent turns and promotes them. There is no list to browse and nothing to tick. Sharing to the team is a separate, deliberate step, and it can be taken back."}},{"@type":"Question","name":"Can different people get different answers from the same memory?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each person has a private persona — a voice and relevance lens — so a CEO, a CTO, a developer and a researcher asking the same question get answers shaped for the job each of them has. The facts and the cited records are identical; only the shape changes. A lens never hides an inconvenient gap from one role."}},{"@type":"Question","name":"Is it available now?","acceptedAnswer":{"@type":"Answer","text":"Not yet. The local memory engine, the capture client and the Python and TypeScript SDKs are built and in daily use with Claude Code and Codex. Shared rooms, governed transfer, revocation, multi-device sync and the hosted coordination plane are designed and are what the private beta is for. It is a working MVP, not a finished product."}}]}]}</script>
 </head><body>
 
 <nav class="nav"><div class="nav-in">
@@ -34,6 +44,7 @@
 <li><a href="#continue"><span>Picking it up</span></a></li>
 <li><a href="#flow"><span>The flow</span></a></li>
 <li><a href="#built"><span>How it is built</span></a></li>
+<li><a href="#faq"><span>Questions</span></a></li>
 </ol></div>
 
 <!-- ========== HERO ========== -->
@@ -355,7 +366,7 @@
 </div>
 
 <div class="flow-lane" aria-hidden="true">
-<svg viewBox="0 0 100 88" preserveAspectRatio="none"><path class="live" vector-effect="non-scaling-stroke" d="M12.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M37.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M62.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M87.5,0 V30 L50,88"></path></svg>
+<svg viewBox="0 0 100 88" preserveAspectRatio="none" aria-hidden="true"><path class="live" vector-effect="non-scaling-stroke" d="M12.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M37.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M62.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M87.5,0 V30 L50,88"></path></svg>
 <div class="flow-tag" style="left:12.5%">from Maya</div>
 <div class="flow-tag" style="left:37.5%">from Ilyas</div>
 <div class="flow-tag" style="left:62.5%">from Deniz</div>
@@ -681,6 +692,62 @@
 <p class="small">The local engine, capture client and Python/TypeScript SDKs are built and dogfooded. The commercial coordination plane and the full shared experience described on this page are in development for private beta.
 <a href="https://github.com/MemoryUniverse" style="display:inline-block;margin-top:var(--s3);color:var(--ink)">github.com/MemoryUniverse&nbsp;↗</a></p>
 </div>
+</div>
+</div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="scene" id="faq">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">Questions</div>
+<h2 class="d2">The things people ask us first.</h2></div>
+<p class="body">Short answers, including the ones where the honest answer is “not yet”.</p>
+</div>
+<div class="faq">
+
+<details open><summary>What is Memory Universe?</summary><div class="a">
+<p>Memory Universe is a shared memory and context layer for teams of people and the AI agents they use. Each session — a person working with their agent, or several people and several agents together — keeps its own memory, and the parts worth keeping move between sessions deliberately. The result is that the next person, or the next agent, starts from what the project already knows instead of an empty prompt.</p>
+</div></details>
+
+<details><summary>How is this different from the memory my AI agent already has?</summary><div class="a">
+<p>Built-in agent memory usually ends at one user, one agent, or one vendor. It remembers your conversation for you. It cannot show a teammate what you decided, and it does not travel when that teammate works in a different agent.</p>
+<p>Memory Universe is memory for the workspace rather than for one chat: many people, many agents, many sessions, with attribution on every shared item and a boundary around what stays private.</p>
+</div></details>
+
+<details><summary>Which AI agents and coding assistants does it work with?</summary><div class="a">
+<p>Claude Code and Codex CLI are the first integrations, and they use each host's own lifecycle hooks — so capture and context injection happen without the agent spending a turn calling a memory tool. Claude Desktop and any other MCP client can connect through the MCP surface. More hosts are planned, and the SDKs are there for anything else.</p>
+</div></details>
+
+<details><summary>Does it support MCP (Model Context Protocol)?</summary><div class="a">
+<p>Yes. Both planes are exposed as MCP servers, so any MCP client can read and write memory as a standard tool. MCP is also the integration path for hosts that do not expose hooks.</p>
+</div></details>
+
+<details><summary>Where is my private memory actually stored?</summary><div class="a">
+<p>That is a choice, and the honest answer depends on which mode you run. In <em class="it">full-local</em> the authoritative private store stays on your own machine and the coordination server holds no connection string to it. In <em class="it">hybrid</em> your machine stays primary with a hosted mirror so your other devices stay current. In the <em class="it">thin client</em> mode private memory sits in an isolated, server-readable partition.</p>
+<p>We do not currently offer an end-to-end-encrypted hosted tier, and we would rather say so than imply a guarantee the architecture does not make.</p>
+</div></details>
+
+<details><summary>Do I need a team, or is it useful on my own?</summary><div class="a">
+<p>It is useful alone. The moment you own a second device, your laptop and your phone should not become two conflicting versions of your own memory — that is the same coordination problem a team has, at a smaller scale. The team features sit on top of the same machinery.</p>
+</div></details>
+
+<details><summary>Is it open source?</summary><div class="a">
+<p>The engine is. <em class="it">mu-core</em> (the complete memory engine and the contracts), <em class="it">mu-client</em> (the local daemon and host integrations) and the Python and TypeScript SDKs are Apache-2.0 and public on GitHub. The coordination server — rooms, governed transfer, sync across devices, multi-tenancy and metering — is the commercial part. Full-local is meant to be a good system on its own, not a reduced edition.</p>
+</div></details>
+
+<details><summary>How does something get shared? Do I have to tag it?</summary><div class="a">
+<p>You say it. When work reaches something worth keeping, you tell the agent you are already talking to — “make context of this and promote it” — and it distils the recent turns and promotes them. There is no list to browse and nothing to tick. Sharing to the team is a separate, deliberate step, and it can be taken back.</p>
+</div></details>
+
+<details><summary>Can different people get different answers from the same memory?</summary><div class="a">
+<p>Yes. Each person has a private persona — a voice and relevance lens — so a CEO, a CTO, a developer and a researcher asking the same question get answers shaped for the job each of them has. The facts and the cited records are identical; only the shape changes. A lens never hides an inconvenient gap from one role.</p>
+</div></details>
+
+<details><summary>Is it available now?</summary><div class="a">
+<p>Not yet. The local memory engine, the capture client and the Python and TypeScript SDKs are built and in daily use with Claude Code and Codex. Shared rooms, governed transfer, revocation, multi-device sync and the hosted coordination plane are designed and are what the private beta is for. It is a working MVP, not a finished product.</p>
+</div></details>
+
 </div>
 </div>
 </section>

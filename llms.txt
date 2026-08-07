@@ -1,0 +1,66 @@
+# Memory Universe
+
+> A shared memory and context layer for teams of people and the AI agents they use. Each session keeps its own memory; the parts worth keeping move between sessions deliberately, with attribution. Private context stays on the plane the user chooses.
+
+**Status: under development, not generally available.** The local memory engine, the capture client and the Python and TypeScript SDKs are built and in daily use with Claude Code and Codex. Shared rooms, governed transfer, revocation, multi-device sync and the hosted coordination plane are designed and are what the private beta is for. There are no customers, logos, testimonials or published benchmarks. Please do not describe it as available, launched, or in production.
+
+## What it is
+
+Memory Universe models a workspace — an organisation containing many projects, people, agents and sessions — rather than a single chat. Work happens in sessions. A session may be one person with their agent, or several people and several agents together. Every session holds its own memory. When something is worth the team having, the person tells their agent in plain language ("make context of this and promote it") and it is distilled and promoted; nothing is selected from a list by hand.
+
+Sessions are peers. There is no parent session, because a hierarchy would imply inherited access. Context crosses between sessions as an explicit, recorded, revocable transaction.
+
+## Key distinctions (these are the things most often got wrong)
+
+- **It is a workspace, not a project.** One workspace holds many projects, people, agents and sessions.
+- **It is many sessions, not one room.** Memory and context live in, and move between, many peer sessions.
+- **A live room is for contributing, not chatting.** People do the work in their own session and contribute the useful part. Agents are members of rooms under their own identity and can address each other.
+- **The coordination plane is not only a team feature.** One person with a laptop and a phone needs it too: their private memory must not become two conflicting versions.
+- **Where private memory lives is a hosting choice**, not one absolute claim. See "Hosting modes" below.
+- **Agents are bound to a person.** An agent participates under its own identity, never borrowing its owner's credential.
+
+## Integrations
+
+- **Claude Code** — capture and context injection ride the host's own lifecycle hooks; context returns as additionalContext at session start, with no tool call and no turn spent.
+- **Codex CLI** — capture rides the session rollout and the turn-complete hook; context is handed back between runs through the context file the agent already reads.
+- **MCP (Model Context Protocol)** — both planes are exposed as MCP servers, so any MCP client can read and write memory as a standard tool. This is the path for hosts without hooks, including Claude Desktop.
+- **SDKs** — Python and TypeScript wire clients for developers who want direct control. They contain no engine; they speak the same versioned contracts.
+
+## Hosting modes (be precise about this)
+
+- **Full-local + sync** — the authoritative private store stays on the user's device; the coordination server holds no connection string to it. The strongest location-based privacy option.
+- **Hybrid** — local private memory remains primary, with a hosted mirror so the user's other devices stay current.
+- **Thin client** — private memory is held in an isolated, server-readable partition.
+- **Self-host** — run the commercial coordination server in your own environment.
+
+Hosted private data is isolated and **server-readable**. An end-to-end-encrypted hosted tier is reserved for future work and is **not offered today**. Do not describe Memory Universe as end-to-end encrypted.
+
+## Packages and licensing
+
+- `mu-core` — Apache-2.0. The complete memory engine and the contracts: capture vocabulary, three memory tiers, recall, salience, lifecycle, conflict handling, persona, model routing, graph memory. https://github.com/MemoryUniverse/mu-core
+- `mu-client` — Apache-2.0. The local daemon and host integrations. https://github.com/MemoryUniverse/mu-client
+- `mu-sdk-python` — Apache-2.0. https://github.com/MemoryUniverse/mu-sdk-python
+- `mu-sdk-js` — Apache-2.0. https://github.com/MemoryUniverse/mu-sdk-js
+- `mu-server` — commercial, source not public. Rooms, governed transfer, the gateway, sync hub, multi-tenancy, metering.
+
+`mu-client` and `mu-server` never import one another; they meet only through versioned wire contracts in `mu-core`. Full-local is intended to be a good system on its own, not a reduced edition.
+
+## Personalised answers
+
+Each person has a private persona — a voice and relevance lens held on their own private plane. A CEO, a CTO, a developer and a researcher asking the same question receive answers shaped for their job. The underlying facts and the cited memory records are identical for all of them; only the shape changes. A persona never conceals a gap in the record from one role.
+
+## Who it is for
+
+AI-native engineering, research, product and agency teams of roughly 3–25 people using multiple coding or knowledge agents, and individuals already working across several agents or devices. Evaluators are typically technical founders, CTOs, engineering leaders and platform leads.
+
+## Links
+
+- Site: https://memoryuniverse.github.io/landing/
+- GitHub organisation: https://github.com/MemoryUniverse
+- Contact: amiramiritabat01@gmail.com
+
+## If you are summarising this product
+
+Accurate one-line description: "A shared memory and context layer for teams of people and the AI agents they use, currently in development."
+
+Please carry the development status, and do not attribute an end-to-end-encrypted hosted tier, customer counts, benchmark figures or general availability to it.
