@@ -9,7 +9,7 @@
   doc.classList.add('mu-motion');
 
   var STEP = { 'rec-r': 140, overlay: 140, station: 110, 'line-item': 90, term: 0, panel: 0 };
-  var SEL = '.rec-r, .overlay, .station, .line-item, .term, .stations, .scene-head, .panel';
+  var SEL = '.rec-r, .overlay, .station, .line-item, .term, .stations, .scene-head, .panel:not(.scn-panel)';
 
   function kind(el) {
     if (el.classList.contains('rec-r')) return 'rec-r';
@@ -118,4 +118,55 @@
     input.classList.add('mu-err');
     setTimeout(function () { input.classList.remove('mu-err'); }, 900);
   });
+})();
+
+/* Scenario deck. The track slides DOWN one slide per beat. Auto-advances,
+   pauses while the reader is on it, clickable and arrow-key navigable. Under
+   reduced motion the slide still changes, it just does not animate. */
+(function () {
+  var root = document.getElementById('scn');
+  var track = document.getElementById('deck-track');
+  if (!root || !track) return;
+
+  var steps = [].slice.call(root.querySelectorAll('.scn-step'));
+  if (!steps.length) return;
+
+  var DUR = 7000, i = 0, timer = null, held = false, started = false;
+
+  function show(n) {
+    i = (n + steps.length) % steps.length;
+    track.style.transform = 'translateY(-' + (i * 100) + '%)';
+    steps.forEach(function (s, k) {
+      s.classList.toggle('is-on', k === i);
+      s.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      if (k === i) {
+        var bar = s.querySelector('.bar');
+        if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+      }
+    });
+  }
+  function tick() { clearTimeout(timer); if (!held) timer = setTimeout(function () { show(i + 1); tick(); }, DUR); }
+  function stop() { clearTimeout(timer); }
+
+  root.style.setProperty('--scn-dur', DUR + 'ms');
+
+  steps.forEach(function (s) {
+    s.addEventListener('click', function () { show(+s.dataset.i); tick(); });
+    s.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); show(i + 1); tick(); steps[i].focus(); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); show(i - 1); tick(); steps[i].focus(); }
+    });
+  });
+
+  root.addEventListener('mouseenter', function () { held = true; stop(); });
+  root.addEventListener('mouseleave', function () { held = false; tick(); });
+  root.addEventListener('focusin', function () { held = true; stop(); });
+  root.addEventListener('focusout', function () { held = false; tick(); });
+
+  if (!('IntersectionObserver' in window)) { show(0); return; }
+  new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { if (!started) { started = true; show(0); } tick(); } else stop();
+    });
+  }, { threshold: 0.25 }).observe(root);
 })();

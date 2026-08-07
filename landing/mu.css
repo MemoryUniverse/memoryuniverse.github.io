@@ -559,3 +559,215 @@ text.k-rv{fill:var(--revoke)}
 .pkg .repo a{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.02em;color:var(--ink-2);border-bottom:1px solid var(--rule);padding-bottom:2px}
 .pkg .repo a:hover{color:var(--ink);border-bottom-color:var(--transfer);text-decoration:none}
 .pkg .repo .none{font-family:var(--f-mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+
+/* ---------- map v3: humans and agents held apart, and the memory shown ---------- */
+.scell{width:272px}
+.srow{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;padding:7px 12px;border-bottom:1px solid var(--rule-soft)}
+.srow:last-child{border-bottom:0}
+.srow>.lbl{font-family:var(--f-mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip-h{width:23px;height:23px;border-radius:50%;border:1px solid var(--rule);background:var(--ground);display:grid;place-items:center;font-family:var(--f-mono);font-size:8.5px;color:var(--ink-2)}
+.chip-a{width:21px;height:21px;border-radius:2px;border:1px solid var(--agent);background:var(--agent-tint);display:grid;place-items:center;font-family:var(--f-mono);font-size:8px;color:#BDB8F8}
+.srow--mem{background:#1B222B}
+.srow--mem .val{font-family:var(--f-mono);font-size:10.5px;color:var(--shared);letter-spacing:.03em}
+.scell--priv .srow--mem{background:#2C241C}
+.scell--priv .srow--mem .val{color:var(--private)}
+.scell-h .sub2{font-family:var(--f-mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);display:block;margin-top:3px}
+.imap{height:700px}
+@media (max-width:1440px){.imap{height:680px}.scell{width:246px}}
+@media (max-width:1180px){.imap{height:auto}.scell,.scell--priv{width:auto}}
+
+/* the private cards sit in the gutters between columns, so they must stay narrow.
+   Same specificity as .scell means source order decides — be explicit instead. */
+.scell.scell--priv{width:168px}
+@media (max-width:1180px){.scell.scell--priv{width:auto}}
+
+/* ==========================================================================
+   SCENARIO PLAYER — one piece of work, start to finish.
+   Every move is made by SAYING it to an agent. Nothing is picked from a list.
+   ========================================================================== */
+.scn{display:grid;grid-template-columns:300px minmax(0,1fr);gap:0;border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.scn-steps{border-right:1px solid var(--rule);background:var(--paper)}
+.scn-step{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:var(--s5) var(--s5);
+  border-bottom:1px solid var(--rule-soft);cursor:pointer;position:relative;background:none;border-left:0;border-right:0;border-top:0;
+  width:100%;text-align:left;font:inherit;color:inherit}
+.scn-step:last-child{border-bottom:0}
+.scn-step .k{font-family:var(--f-mono);font-size:11px;color:var(--faint);padding-top:2px}
+.scn-step b{display:block;font-size:16px;font-weight:500;line-height:1.25;color:var(--muted)}
+.scn-step .sub{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:5px}
+.scn-step .txt{display:block;font-family:var(--f-body);text-transform:none;letter-spacing:0}
+.scn-step.is-on b{color:var(--ink)}
+.scn-step.is-on .k{color:var(--transfer)}
+.scn-step:hover b{color:var(--ink-2)}
+.scn-step .bar{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--rule)}
+.scn-step.is-on .bar{background:var(--transfer)}
+.mu-motion .scn-step.is-on .bar{transform-origin:top;animation:scn-fill var(--scn-dur,7s) linear forwards}
+@keyframes scn-fill{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.scn-stage{position:relative;min-height:430px;background:var(--dark-2)}
+.scn-panel{display:none;padding:var(--s6)}
+.scn-panel.is-on{display:block}
+.mu-motion .scn-panel.is-on{animation:scn-in .32s var(--ease) both}
+@keyframes scn-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.scn-where{display:flex;align-items:center;gap:10px;padding-bottom:var(--s4);margin-bottom:var(--s4);border-bottom:1px solid var(--dark-rule);
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--dark-muted);flex-wrap:wrap}
+.scn-where b{font-family:var(--f-body);font-size:16px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink)}
+.scn-where .new{color:var(--live);border:1px solid #245C38;border-radius:var(--r);padding:3px 7px;font-size:9.5px}
+.scn-t{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:9px 0;font-size:16.5px;line-height:1.45}
+.scn-t .a{width:30px;height:30px;border-radius:50%;border:1px solid var(--dark-rule);display:grid;place-items:center;font-family:var(--f-mono);font-size:9.5px;color:var(--ink-2)}
+.scn-t.is-agent .a{border-radius:2px;border-color:var(--agent);background:var(--agent-tint);color:#BDB8F8}
+.scn-t .nm{font-size:12px;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.scn-t p{color:var(--ink)}
+.scn-t--say p{border-left:2px solid var(--transfer);padding-left:var(--s4)}
+.scn-sys{font-family:var(--f-mono);font-size:12.5px;line-height:1.6;color:#8B87F0;padding:6px 0 6px 42px}
+.scn-sys.ok{color:#4ED17F}
+.scn-note{margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--dark-rule);font-size:15.5px;color:var(--dark-muted);line-height:1.5}
+.scn-note b{color:var(--ink-2);font-weight:500}
+@media (max-width:900px){.scn{grid-template-columns:1fr}
+.scn-steps{border-right:0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(5,1fr)}
+.scn-step{border-bottom:0;border-right:1px solid var(--rule-soft);padding:var(--s4) var(--s3);grid-template-columns:1fr}
+.scn-step:last-child{border-right:0}
+.scn-step b,.scn-step .sub,.scn-step .txt{display:none}
+.scn-step .k{padding-top:0;text-align:center}
+.scn-step .bar{left:0;right:0;top:auto;bottom:0;width:auto;height:2px}
+.mu-motion .scn-step.is-on .bar{transform-origin:left;animation-name:scn-fill-x}
+@keyframes scn-fill-x{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.scn-stage{min-height:0}}
+@media (prefers-reduced-motion:reduce){.scn-panel{display:block!important;border-bottom:1px solid var(--dark-rule)}}
+
+/* ==========================================================================
+   SCENARIO STAGE — the story is told by session containers and what moves
+   between them. Everything is driven off [data-beat] on the stage.
+   ========================================================================== */
+.stg{position:relative;height:520px;background:var(--dark-2);overflow:hidden;
+  background-image:radial-gradient(circle at 1px 1px,#161D26 1px,transparent 0);background-size:30px 30px}
+.stg-cap{position:absolute;left:0;right:0;bottom:0;padding:14px 20px;border-top:1px solid var(--dark-rule);
+  background:var(--dark);font-size:16px;line-height:1.45;color:var(--ink-2);min-height:56px}
+.stg-cap b{color:var(--ink);font-weight:500}
+
+/* a session, as a container */
+.sbox{position:absolute;left:50%;transform:translateX(-50%);width:352px;border:1px solid var(--rule);
+  border-radius:var(--r);background:var(--paper);transition:opacity .45s var(--ease),transform .45s var(--ease),border-color .3s var(--ease)}
+.sbox-h{display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--rule);font-size:15.5px;font-weight:500}
+.sbox-h .hash{font-family:var(--f-mono);color:var(--faint)}
+.sbox-h .tag{margin-left:auto;font-family:var(--f-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--live)}
+.sbox-r{display:grid;grid-template-columns:46px minmax(0,1fr);gap:10px;align-items:center;padding:8px 14px;border-bottom:1px solid var(--rule-soft)}
+.sbox-r .lbl{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+.sbox-r:last-child{border-bottom:0}
+.sbox-mem{background:#1B222B}
+.sbox-mem .val{font-family:var(--f-mono);font-size:11px;color:var(--shared)}
+.pip{width:22px;height:22px;border-radius:50%;border:1px solid var(--rule);background:var(--ground);display:inline-grid;place-items:center;
+  font-family:var(--f-mono);font-size:8px;color:var(--ink-2);margin-right:5px;transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.pip--a{border-radius:2px;border-color:var(--agent);background:var(--agent-tint);color:#BDB8F8;width:20px;height:20px}
+.pip--ghost{opacity:0;transform:scale(.6)}
+
+/* the room and the session opened out of it */
+#b-room{top:26px}
+#b-sub{top:300px;width:330px;opacity:0;transform:translateX(-50%) translateY(-26px) scale(.96)}
+.stg:not([data-beat="1"]) #b-sub{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+.stg[data-beat="3"] #b-sub,.stg[data-beat="4"] #b-sub{border-color:#33685F}
+.stg[data-beat="5"] #b-room{border-color:#33685F}
+
+/* the line between them, and the items that travel it */
+.wire{position:absolute;left:50%;top:172px;height:128px;width:1px;background:var(--rule);opacity:0;transition:opacity .3s var(--ease)}
+.stg:not([data-beat="1"]) .wire{opacity:1}
+.wire-lab{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:var(--f-mono);font-size:9.5px;
+  letter-spacing:.11em;text-transform:uppercase;white-space:nowrap;color:var(--transfer);opacity:0;transition:opacity .3s var(--ease)}
+.stg[data-beat="2"] .wire-lab.down,.stg[data-beat="5"] .wire-lab.up{opacity:1}
+.wire-lab.up{color:var(--shared)}
+.trav{position:absolute;left:-4px;width:9px;height:9px;border-radius:1px;background:var(--transfer);opacity:0}
+.trav.up{background:var(--shared)}
+.mu-motion .stg[data-beat="2"] .trav.down{animation:trav-down 1.5s var(--ease) var(--d) forwards}
+.mu-motion .stg[data-beat="5"] .trav.up{animation:trav-up 1.5s var(--ease) var(--d) forwards}
+@keyframes trav-down{0%{opacity:0;top:0}12%{opacity:1}88%{opacity:1}100%{opacity:0;top:120px}}
+@keyframes trav-up{0%{opacity:0;top:120px}12%{opacity:1}88%{opacity:1}100%{opacity:0;top:0}}
+
+/* the teammate who joins mid-session */
+.flyer{position:absolute;left:14%;top:300px;width:26px;height:26px;border-radius:50%;border:1px solid var(--rule);
+  background:var(--ground);display:grid;place-items:center;font-family:var(--f-mono);font-size:8.5px;color:var(--ink-2);
+  opacity:0;transition:opacity .4s var(--ease),left .7s var(--ease),top .7s var(--ease)}
+.stg[data-beat="4"] .flyer{opacity:1;left:44%;top:352px}
+.flyer-lab{position:absolute;left:14%;top:330px;transform:translateX(-8px);font-family:var(--f-mono);font-size:9.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--faint);opacity:0;transition:opacity .4s var(--ease)}
+.stg[data-beat="4"] .flyer-lab{opacity:1}
+@media (max-width:900px){.stg{height:470px}.sbox{width:290px}#b-sub{width:274px;top:272px}
+.wire{top:166px;height:106px}@keyframes trav-down{0%{opacity:0;top:0}12%{opacity:1}88%{opacity:1}100%{opacity:0;top:100px}}}
+@media (prefers-reduced-motion:reduce){.sbox,.wire,.flyer,.flyer-lab{opacity:1!important;transform:translateX(-50%)!important}
+.trav{display:none}.wire-lab{opacity:1!important}}
+
+/* the flyer hands off to the pip rather than sitting on top of it */
+.stg[data-beat="4"] .flyer{animation:flyer-out .35s var(--ease) 1.15s forwards}
+@keyframes flyer-out{to{opacity:0}}
+.stg[data-beat="4"] .flyer-lab{animation:flyer-out .35s var(--ease) 1.15s forwards}
+#pip-elif,#pip-elif-a{transition-delay:1.2s}
+.stg:not([data-beat="4"]) #pip-elif,.stg:not([data-beat="4"]) #pip-elif-a{transition-delay:0s}
+
+/* Layering and spacing corrections: the wire was drawing across the room's
+   memory row, and the lower container sat too close to the caption bar. */
+.stg{height:566px}
+.sbox{z-index:2}
+.wire{z-index:1;top:210px;height:98px}
+.flyer,.flyer-lab{z-index:3}
+.stg-cap{z-index:4}
+#b-sub{top:308px}
+@keyframes trav-down{0%{opacity:0;top:0}12%{opacity:1}88%{opacity:1}100%{opacity:0;top:92px}}
+@keyframes trav-up{0%{opacity:0;top:92px}12%{opacity:1}88%{opacity:1}100%{opacity:0;top:0}}
+.stg[data-beat="4"] .flyer{top:360px}
+.flyer-lab{top:338px}
+@media (max-width:900px){.stg{height:520px}#b-sub{top:286px}.wire{top:206px;height:80px}
+@keyframes trav-down{0%{opacity:0;top:0}12%{opacity:1}88%{opacity:1}100%{opacity:0;top:74px}}
+@keyframes trav-up{0%{opacity:0;top:74px}12%{opacity:1}88%{opacity:1}100%{opacity:0;top:0}}}
+
+/* the scenario is a rendered clip now, not CSS — the page just frames it */
+.scnvid{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--ground);
+  border:1px solid var(--rule);border-radius:var(--r)}
+.scnvid-note{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s5);align-items:center;margin-top:var(--s4);
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)}
+.scnvid-note button{font:inherit;color:var(--ink-2);background:none;border:1px solid var(--rule);
+  border-radius:var(--r);padding:5px 10px;cursor:pointer}
+.scnvid-note button:hover{border-color:var(--transfer);color:var(--ink)}
+
+/* ==========================================================================
+   SLIDE DECK — the beats are slides; the track slides DOWN from one to the next.
+   ========================================================================== */
+.deck{display:grid;grid-template-columns:290px minmax(0,1fr);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.deck-rail{border-right:1px solid var(--rule);background:var(--paper)}
+.deck-view{position:relative;height:498px;overflow:hidden;background:var(--dark-2)}
+.deck-track{position:absolute;inset:0;transition:transform .62s cubic-bezier(.22,.7,.2,1)}
+.slide{position:absolute;left:0;right:0;height:498px;padding:var(--s6) var(--s7);display:grid;
+  grid-template-columns:minmax(0,1fr) 340px;gap:var(--s7);align-content:start}
+.slide-where{grid-column:1/-1;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding-bottom:var(--s4);margin-bottom:var(--s2);border-bottom:1px solid var(--dark-rule);
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dark-muted)}
+.slide-where b{font-family:var(--f-body);font-size:17px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink)}
+.slide-where .new{color:var(--live);border:1px solid #245C38;border-radius:var(--r);padding:2px 7px;font-size:9px}
+/* the containers, compact, inside a slide */
+.mini{border:1px solid var(--rule);border-radius:var(--r);background:var(--paper);margin-bottom:var(--s4)}
+.mini:last-child{margin-bottom:0}
+.mini--lit{border-color:#33685F}
+.mini-h{display:flex;align-items:center;gap:8px;padding:9px 13px;border-bottom:1px solid var(--rule);font-size:14.5px;font-weight:500}
+.mini-h .hash{font-family:var(--f-mono);color:var(--faint)}
+.mini-h em{font-style:normal;margin-left:auto;font-family:var(--f-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--live)}
+.mini-b{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:9px 13px;border-bottom:1px solid var(--rule-soft)}
+.mini-b:last-child{border-bottom:0}
+.mini-b .lbl{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);width:42px;flex:none}
+.mini-b .mem{font-family:var(--f-mono);font-size:11.5px;color:var(--shared)}
+.mini-b .grow{color:var(--live)}
+.arrow{display:flex;align-items:center;gap:10px;margin:0 0 var(--s4) 13px;
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--transfer)}
+.arrow:before{content:"";width:1px;height:20px;background:var(--transfer);flex:none}
+.arrow.up{color:var(--shared)}.arrow.up:before{background:var(--shared)}
+/* the right column: what was said, and what it did */
+.slide-said em{font-style:normal;display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.slide-said p{border-left:2px solid var(--transfer);padding-left:var(--s4);font-size:18px;line-height:1.45;color:var(--ink)}
+.slide-det{list-style:none;margin-top:var(--s5);display:flex;flex-direction:column;gap:11px}
+.slide-det li{font-size:15px;line-height:1.45;color:var(--muted);padding-left:16px;position:relative}
+.slide-det li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:1px;background:var(--faint)}
+.slide-det li b{color:var(--ink-2);font-weight:500}
+.slide-sys{margin-top:var(--s5);font-family:var(--f-mono);font-size:11.5px;line-height:1.6;color:#8B87F0}
+.slide-sys.ok{color:#4ED17F}
+@media (max-width:1000px){.deck{grid-template-columns:1fr}
+.deck-rail{border-right:0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:repeat(5,1fr)}
+.deck-view,.slide{height:auto;min-height:640px}
+.slide{grid-template-columns:1fr;gap:var(--s5)}}
+@media (prefers-reduced-motion:reduce){.deck-track{transition:none}}
