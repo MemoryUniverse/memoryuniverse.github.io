@@ -170,3 +170,27 @@
     });
   }, { threshold: 0.25 }).observe(root);
 })();
+
+/* Persona tabs — one question, four lenses. Reduced motion shows all four
+   stacked (the CSS handles that) and this simply never rebinds them. */
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll('.ptab'));
+  var answers = [].slice.call(document.querySelectorAll('.pans'));
+  if (!tabs.length || tabs.length !== answers.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function show(n) {
+    tabs.forEach(function (t, k) {
+      t.classList.toggle('is-on', k === n);
+      t.setAttribute('aria-selected', k === n ? 'true' : 'false');
+    });
+    answers.forEach(function (a, k) { a.classList.toggle('is-on', k === n); });
+  }
+  tabs.forEach(function (t, k) {
+    t.addEventListener('click', function () { show(k); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); var n = (k + 1) % tabs.length; show(n); tabs[n].focus(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); var m = (k - 1 + tabs.length) % tabs.length; show(m); tabs[m].focus(); }
+    });
+  });
+})();

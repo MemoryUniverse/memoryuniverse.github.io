@@ -771,3 +771,62 @@ text.k-rv{fill:var(--revoke)}
 .deck-view,.slide{height:auto;min-height:640px}
 .slide{grid-template-columns:1fr;gap:var(--s5)}}
 @media (prefers-reduced-motion:reduce){.deck-track{transition:none}}
+
+/* the right half of a slide is a chat room, not a quote block */
+.chat{display:flex;flex-direction:column;gap:0}
+.cmsg{display:grid;grid-template-columns:30px minmax(0,1fr);gap:11px;padding:10px 0;border-bottom:1px solid #1B222B}
+.cmsg:last-of-type{border-bottom:0}
+.cmsg .av{width:30px;height:30px;border-radius:50%;border:1px solid var(--dark-rule);background:var(--ground);
+  display:grid;place-items:center;font-family:var(--f-mono);font-size:9.5px;color:var(--ink-2)}
+.cmsg--agent .av{border-radius:2px;border-color:var(--agent);background:var(--agent-tint);color:#BDB8F8}
+.cmsg-h{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:4px}
+.cmsg-h b{font-size:14.5px;font-weight:500;color:var(--ink)}
+.cmsg-h span{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.cmsg-h .t{margin-left:auto}
+.cmsg-h .to{border:1px solid var(--agent);border-radius:var(--r);padding:1px 6px;color:#BDB8F8}
+.cmsg p{font-size:15.5px;line-height:1.45;color:var(--ink)}
+.cmsg--say p{border-left:2px solid var(--transfer);padding-left:13px}
+.cmsg--say .cmsg-h b{color:var(--ink)}
+.csys{font-family:var(--f-mono);font-size:11px;line-height:1.6;color:#8B87F0;padding:9px 0 0 41px}
+.csys.ok{color:#4ED17F}
+.cnote{margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--dark-rule);font-size:14.5px;line-height:1.5;color:var(--muted)}
+.cnote b{color:var(--ink-2);font-weight:500}
+
+/* the chat slides are taller than the original prose ones — size the viewport
+   to the tallest so nothing is cut off mid-message */
+.deck-view{height:700px}
+.slide{height:700px;padding:var(--s6) var(--s6)}
+@media (max-width:1000px){.deck-view,.slide{height:auto;min-height:0}}
+
+/* ==========================================================================
+   PERSONA — one question, one set of memories, differently shaped answers.
+   The lens is private to each person and changes the voice, never the facts.
+   ========================================================================== */
+.pq{border:1px solid var(--rule);border-radius:var(--r);background:var(--paper);padding:var(--s5) var(--s6);margin-bottom:var(--s6)}
+.pq .lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.pq p{font-size:22px;line-height:1.35;color:var(--ink);font-family:var(--f-display);font-weight:600;letter-spacing:-.012em}
+.ptabs{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule);border-bottom:0;border-radius:var(--r) var(--r) 0 0;overflow:hidden}
+.ptab{background:var(--paper);border:0;border-right:1px solid var(--rule);padding:var(--s5) var(--s4);cursor:pointer;text-align:left;font:inherit;color:inherit;position:relative}
+.ptab:last-child{border-right:0}
+.ptab b{display:block;font-size:16.5px;font-weight:500;color:var(--muted);line-height:1.2}
+.ptab span{display:block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-top:6px}
+.ptab.is-on{background:var(--dark-2)}
+.ptab.is-on b{color:var(--ink)}
+.ptab.is-on:after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--transfer)}
+.ptab:hover b{color:var(--ink-2)}
+.pbody{border:1px solid var(--rule);border-radius:0 0 var(--r) var(--r);background:var(--dark-2);padding:var(--s6)}
+.pans{display:none}
+.pans.is-on{display:block}
+.mu-motion .pans.is-on{animation:scn-in .3s var(--ease) both}
+.pans .lens{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--private);margin-bottom:var(--s4)}
+.pans p{font-size:18.5px;line-height:1.55;color:var(--ink);margin-bottom:var(--s3)}
+.pans p:last-of-type{margin-bottom:0}
+.pcite{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--dark-rule)}
+.pcite .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--dark-muted);margin-bottom:11px}
+.pcite .ids{display:flex;flex-wrap:wrap;gap:9px}
+.pcite code{font-family:var(--f-mono);font-size:12px;border:1px solid #2E5F59;border-radius:var(--r);padding:5px 9px;color:var(--shared);background:var(--shared-tint)}
+@media (max-width:820px){.ptabs{grid-template-columns:repeat(2,1fr)}
+.ptab:nth-child(2n){border-right:0}
+.ptab:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+.pq p{font-size:19px}}
+@media (prefers-reduced-motion:reduce){.pans{display:block!important;border-bottom:1px solid var(--dark-rule);padding-bottom:var(--s5);margin-bottom:var(--s5)}}
