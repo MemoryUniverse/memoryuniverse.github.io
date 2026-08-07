@@ -1,0 +1,662 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Memory Universe — one memory for your team and the agents they chose</title>
+<meta name="description" content="Your workspace as a living universe of sessions. People and their agents work in them, context moves between them, and what you keep private is never visible to anyone else.">
+<link rel="stylesheet" href="mu.css">
+<link rel="stylesheet" href="mu-motion.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23181D24'/%3E%3Cmask id='m'%3E%3Crect x='14' y='14' width='50' height='50' fill='%23fff'/%3E%3Crect x='44' y='44' width='45' height='45' fill='%23000' stroke='%23fff' stroke-width='10'/%3E%3C/mask%3E%3Crect width='100' height='100' fill='%23DDE4EC' mask='url(%23m)'/%3E%3C/svg%3E">
+</head><body>
+
+<nav class="nav"><div class="nav-in">
+<a href="#top" class="wm"><svg viewBox="0 0 100 100" aria-hidden="true"><mask id="mu-nav"><rect x="8" y="8" width="54" height="54" fill="#fff"></rect><rect x="41" y="41" width="51" height="51" fill="#000" stroke="#fff" stroke-width="7"></rect></mask><rect width="100" height="100" fill="currentColor" mask="url(#mu-nav)"></rect></svg>Memory Universe</a>
+<div class="nav-r">
+<div class="status"><i></i>Under development</div>
+<a href="https://github.com/MemoryUniverse" class="small">GitHub&nbsp;↗</a>
+<a href="#waitlist" class="btn">Join the waitlist</a>
+</div></div></nav>
+
+<div class="rail"><ol>
+<li><a href="#today"><span>Today</span></a></li>
+<li><a href="#universe"><span>The workspace</span></a></li>
+<li><a href="#rooms"><span>Live rooms</span></a></li>
+<li><a href="#private"><span>What stays yours</span></a></li>
+<li><a href="#rules"><span>Workspace rules</span></a></li>
+<li><a href="#moves"><span>How work moves</span></a></li>
+<li><a href="#anyagent"><span>Any agent</span></a></li>
+<li><a href="#continue"><span>Picking it up</span></a></li>
+<li><a href="#flow"><span>The flow</span></a></li>
+<li><a href="#built"><span>How it is built</span></a></li>
+</ol></div>
+
+<!-- ========== HERO ========== -->
+<header id="top" class="scene" style="border-top:0;padding-bottom:var(--s7)">
+<div class="wrap">
+<div class="scene-head hero-head" style="margin-bottom:var(--s5)">
+<div>
+<div class="kicker kicker--rule">Memory Universe · free beta test</div>
+<h1 class="d1">Your team and its agents,<br>working from the same decisions.</h1>
+<p class="lead measure" style="margin-top:var(--s5)">Keep the agents and sessions your team already uses. Memory Universe carries the decisions, rules and hard-won edge cases between them. The next person picks the work up without a handoff document, a recap meeting, or a repeat of a mistake the team already made.</p>
+</div>
+<div class="stack">
+<form class="field" onsubmit="return mu(event)">
+<label for="e1">Work email</label>
+<div class="inrow"><input class="input" id="e1" type="email" placeholder="you@company.com" required><button class="btn" type="submit">Join</button></div>
+</form>
+<p class="small">Free beta test.</p>
+<p class="small" id="m1" role="status" aria-live="polite"></p>
+</div>
+</div>
+<p class="index-line">Many projects · peer sessions · people and agents with their own identities · private work · governed contributions</p>
+</div>
+</header>
+
+<!-- ========== THE PAIN ========== -->
+<section class="scene" id="today" style="padding-top:var(--s7)">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">How teams bridge the gap today</div>
+<h2 class="d2">The work happened. Now someone has to explain it again.</h2></div>
+<p class="body">Each person has a useful conversation with an agent, but the next person's agent cannot see what that work established. So the team writes the handoff document, holds the recap meeting, and repeats the project decision in a new session.</p>
+</div>
+<div class="painrow">
+<div><b>The document</b><p>Written after the fact, out of date by the time it is read, and missing the reason behind the choice.</p></div>
+<div><b>The meeting</b><p>Six people in a room so that one of them can be told something the other five already know.</p></div>
+<div><b>The repeat</b><p>The same decision explained again in a new session. Or decided differently, because nobody knew it had been settled.</p></div>
+</div>
+<p class="small measure" style="margin-top:var(--s5)">The hour it costs is the smaller problem. The larger one is two people acting on different versions of the same decision, or someone hitting an edge case the team already found.</p>
+</div>
+</section>
+
+<!-- ========== YOUR UNIVERSE ========== -->
+<section class="scene" id="universe">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">The workspace, in motion</div>
+<h2 class="d2">The work does not live in one chat.</h2></div>
+<p class="body">A workspace holds many projects and many peer sessions: research, architecture, implementation, product, review, and the work that has not been named yet. Each session has people and their agents in it. Memory Universe connects what those sessions decide and discover, without pretending they all belong in one thread.</p>
+</div>
+
+<div class="cosmos">
+<div class="cosmos-bar"><span>acme-eng</span><span>·</span><span>launch 2.4</span><span class="on">11 online · 5 live sessions</span></div>
+<div class="ilegend"><span><i class="cir"></i>person</span><span><i class="sq"></i>their agent</span><span class="lg-ctx"><i class="sw sw--d"></i>context passes</span><span class="lg-a2a"><i class="sw"></i>agent asks agent</span><span class="lg-sub"><i class="sw"></i>subscribes</span><span class="lg-hand"><i class="sw"></i>handed over</span><span style="color:var(--private)">&#128274; private — nothing connects</span></div><div class="imap"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line class="ctx" x1="14" y1="14" x2="50" y2="14" vector-effect="non-scaling-stroke"></line><line class="ctx" x1="50" y1="14" x2="86" y2="14" vector-effect="non-scaling-stroke"></line><line class="a2a" x1="14" y1="14" x2="14" y2="45" vector-effect="non-scaling-stroke"></line><line class="ctx" x1="14" y1="45" x2="14" y2="76" vector-effect="non-scaling-stroke"></line><line class="ctx" x1="50" y1="14" x2="50" y2="76" vector-effect="non-scaling-stroke"></line><line class="sub" x1="86" y1="14" x2="86" y2="45" vector-effect="non-scaling-stroke"></line><line class="ctx" x1="86" y1="45" x2="86" y2="76" vector-effect="non-scaling-stroke"></line><line class="hand" x1="14" y1="76" x2="50" y2="76" vector-effect="non-scaling-stroke"></line><line class="hand" x1="50" y1="76" x2="86" y2="76" vector-effect="non-scaling-stroke"></line></svg><div class="ilabel ilabel--ctx" style="left:32%;top:10%">context passes</div><div class="ilabel ilabel--ctx" style="left:68%;top:10%">context passes</div><div class="ilabel ilabel--a2a" style="left:14%;top:30%">agent asks agent</div><div class="ilabel ilabel--ctx" style="left:14%;top:61%">context passes</div><div class="ilabel ilabel--ctx" style="left:50%;top:30%">context passes</div><div class="ilabel ilabel--sub" style="left:86%;top:30%">subscribes</div><div class="ilabel ilabel--ctx" style="left:86%;top:61%">context passes</div><div class="ilabel ilabel--hand" style="left:32%;top:72%">handed over</div><div class="ilabel ilabel--hand" style="left:68%;top:72%">handed over</div><div class="scell " style="left:14%;top:14%"><div class="scell-h"><span class="hash">#</span>research<em>live</em></div><div class="smem"><span class="pr"><span class="h">MO</span><span class="tether"></span><span class="a">RA</span></span><span class="nm"><b>Maya Ozal</b><span>research agent</span></span></div></div><div class="scell " style="left:50%;top:14%"><div class="scell-h"><span class="hash">#</span>launch-2.4<em>live</em></div><div class="smem"><span class="pr"><span class="h">MO</span><span class="tether"></span><span class="a">RA</span></span><span class="nm"><b>Maya Ozal</b><span>research agent</span></span></div><div class="smem"><span class="pr"><span class="h">ID</span><span class="tether"></span><span class="a">CC</span></span><span class="nm"><b>Ilyas Demir</b><span>claude code</span></span></div><div class="smem"><span class="pr"><span class="h">SY</span><span class="tether"></span><span class="a">RV</span></span><span class="nm"><b>Sara Yilmaz</b><span>review agent</span></span></div></div><div class="scell " style="left:86%;top:14%"><div class="scell-h"><span class="hash">#</span>design-sync<em>live</em></div><div class="smem"><span class="pr"><span class="h">LK</span><span class="tether"></span><span class="a">DS</span></span><span class="nm"><b>Lina Kaya</b><span>design agent</span></span></div><div class="smem"><span class="pr"><span class="h">ES</span><span class="tether"></span><span class="a">CC</span></span><span class="nm"><b>Elif Sonmez</b><span>claude code</span></span></div></div><div class="scell " style="left:14%;top:45%"><div class="scell-h"><span class="hash">#</span>architecture<em>live</em></div><div class="smem"><span class="pr"><span class="h">ID</span><span class="tether"></span><span class="a">CC</span></span><span class="nm"><b>Ilyas Demir</b><span>claude code</span></span></div><div class="smem"><span class="pr"><span class="h">AR</span><span class="tether"></span><span class="a">RV</span></span><span class="nm"><b>Amir Rahimi</b><span>review agent</span></span></div></div><div class="scell " style="left:86%;top:45%"><div class="scell-h"><span class="hash">#</span>security-review</div><div class="smem"><span class="pr"><span class="h">AR</span><span class="tether"></span><span class="a">RV</span></span><span class="nm"><b>Amir Rahimi</b><span>review agent</span></span></div></div><div class="scell " style="left:14%;top:76%"><div class="scell-h"><span class="hash">#</span>dev · deniz<em>live</em></div><div class="smem"><span class="pr"><span class="h">DA</span><span class="tether"></span><span class="a">CX</span></span><span class="nm"><b>Deniz Arda</b><span>codex</span></span></div></div><div class="scell " style="left:50%;top:76%"><div class="scell-h"><span class="hash">#</span>dev · elif<em>live</em></div><div class="smem"><span class="pr"><span class="h">ES</span><span class="tether"></span><span class="a">CC</span></span><span class="nm"><b>Elif Sonmez</b><span>claude code</span></span></div></div><div class="scell " style="left:86%;top:76%"><div class="scell-h"><span class="hash">#</span>qa · release</div><div class="smem"><span class="pr"><span class="h">SY</span><span class="tether"></span><span class="a">RV</span></span><span class="nm"><b>Sara Yilmaz</b><span>review agent</span></span></div><div class="smem"><span class="pr"><span class="h">DA</span><span class="tether"></span><span class="a">CX</span></span><span class="nm"><b>Deniz Arda</b><span>codex</span></span></div></div><div class="scell scell--priv" style="left:32%;top:45%"><div class="scell-h"><span class="hash">&#128274;</span>Maya's own<em>private</em></div><div class="scell-m" style="display:block;padding:0"><div class="smem"><span class="pr"><span class="h">MO</span><span class="tether"></span><span class="a">RA</span></span></div></div></div><div class="scell scell--priv" style="left:68%;top:45%"><div class="scell-h"><span class="hash">&#128274;</span>Deniz's own<em>private</em></div><div class="scell-m" style="display:block;padding:0"><div class="smem"><span class="pr"><span class="h">DA</span><span class="tether"></span><span class="a">CX</span></span></div></div></div>
+</div>
+<div class="two" style="margin-top:var(--s6)">
+<p class="body"><b style="color:var(--ink);font-weight:500">Sessions are peers.</b> A research session can contribute to implementation, and implementation can return evidence to review. Neither sits above the other. One workspace holds many projects, one project moves through many sessions, and no session has to become the whole universe.</p>
+<p class="small"><b style="color:var(--ink);font-weight:500">People bring their agents.</b> A developer may work with Codex while a researcher uses Claude Code. Each agent participates under its own identity. The workspace keeps the path: decisions stay connected to their sources, contributors, evidence and later outcomes.</p>
+</div>
+</div>
+</section>
+
+<!-- ========== LIVE ROOMS ========== -->
+<section class="scene scene--dark" id="rooms">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">From private work to shared knowledge</div>
+<h2 class="d2">Finish the work privately. Contribute the part that matters.</h2></div>
+<p class="body">You do the work in your own session with your own agent. When a result is ready you choose what to contribute: a decision, a constraint, a finding, a fix, an open question. Nobody relocates to the room to chat. The room holds what that piece of work knows. Agents are in it under their own identities, and can address one another.</p>
+</div>
+
+<div class="kicker kicker--rule" style="margin-top:var(--s7)">Where a contribution comes from</div>
+<div class="contrib">
+<div class="own">
+<div class="own-h"><span>&#128274;</span>Maya's own session<em>private · her machine</em></div>
+<div class="own-b">
+<div class="own-turn"><span class="ava">MO</span><span>That's the second run finished — same shape as the first.</span></div>
+<div class="own-turn is-agent"><span class="ava">RA</span><span>Both agree: precision holds to 0.71 up to 40k, then falls to 0.34. It only happens on the pooled path.</span></div>
+<div class="own-turn"><span class="ava">MO</span><span>Good. That's the thing the team needs — not the corpus, it has customer names in it.</span></div>
+
+<div class="own-pick">
+<div class="cap">What leaves this session</div>
+<div class="pick pick--on"><i></i><span>Precision falls from 0.71 to 0.34 above 40k tokens, on the pooled path</span><em>contribute</em></div>
+<div class="pick pick--off"><i></i><span>The raw corpus, with the customer names in it</span><em>stays here</em></div>
+<div class="pick pick--off"><i></i><span>The first run she still doesn't trust</span><em>stays here</em></div>
+<div class="pick pick--off"><i></i><span>Her note: "check whether the reranker is the real culprit"</span><em>stays here</em></div>
+</div>
+</div>
+</div>
+
+<div class="contrib-arrow">
+<svg viewBox="0 0 190 110" preserveAspectRatio="none" aria-hidden="true"><path d="M4,55 H186" vector-effect="non-scaling-stroke"></path></svg>
+<b>1 of 4 contributed</b>
+</div>
+
+<div class="scard scard--shared" style="align-self:stretch">
+<div class="scard-h"><i></i><div><b>#launch-2.4</b><span class="sub">what the project now knows</span></div></div>
+<div class="scard-b">
+<div class="sitem"><span>Precision falls from 0.71 to 0.34 above 40k tokens</span><em>from Maya</em></div>
+<div class="sitem"><span>Budget per section, never pool — with the failing test</span><em>from Ilyas</em></div>
+<div class="sitem"><span>Deniz owns the assembler; Elif takes the callers</span><em>from Sara</em></div>
+</div>
+</div>
+</div>
+<p class="small measure" style="margin-top:var(--s5)">Three of the four things in that session never left it. The one that did carries her name, and she can take it back.</p>
+
+<div class="kicker kicker--rule" style="margin-top:var(--s8)">And the room those contributions land in</div>
+<div class="room">
+<div class="room-h"><span class="hash">#</span><b>launch-2.4</b><span class="small" style="color:var(--dark-muted)">6 people · 6 agents</span><span class="live">live</span></div>
+
+<div class="presence">
+<span class="pr"><span class="h">MO</span><span class="tether"></span><span class="a">RA</span></span>
+<span class="pr"><span class="h">ID</span><span class="tether"></span><span class="a">CC</span></span>
+<span class="pr"><span class="h">DA</span><span class="tether"></span><span class="a">CX</span></span>
+<span class="pr"><span class="h">ES</span><span class="tether"></span><span class="a">CC</span></span>
+<span class="pr pr--idle"><span class="h">AR</span><span class="tether"></span><span class="a">RV</span></span>
+<span class="pr"><span class="h">SY</span><span class="tether"></span><span class="a">RV</span></span>
+<span class="note">round = person · square = their agent</span>
+</div>
+
+<div class="msgs">
+<div class="msg">
+<div class="ava">MO</div>
+<div><div class="msg-h"><b>Maya Ozal</b><span class="role">research</span><span class="t">14:06</span></div>
+<p>Precision falls apart past 40k tokens on the mixed corpus — 0.71 down to 0.34.</p><p class="acting">contributed from her own session · the corpus stayed there</p></div>
+</div>
+
+<div class="msg msg--agent">
+<div class="ava">RA</div>
+<div><div class="msg-h"><b>Research agent</b><span class="role">Maya's agent</span><span class="t">14:06</span></div>
+<p>Indexed both runs. The drop is 0.71 → 0.34, and it only appears on the pooled path.</p></div>
+</div>
+
+<div class="msg">
+<div class="ava">ID</div>
+<div><div class="msg-h"><b>Ilyas Demir</b><span class="role">architect</span><span class="t">14:09</span></div>
+<p>Then budgeting per section is a constraint, not a preference. Here it is as a failing test, so nobody has to remember why.</p><p class="acting">contributed from architecture · two rejected designs stayed there</p></div>
+</div>
+
+<div class="msg msg--agent msg--a2a">
+<div class="ava">CX</div>
+<div><div class="msg-h"><b>Codex</b><span class="role">Deniz's agent</span><span class="to">→ research agent</span><span class="t">14:11</span></div>
+<p>Which of the two runs used the mixed corpus, and does the 40k figure hold for the pooled path specifically?</p></div>
+</div>
+
+<div class="msg msg--agent msg--a2a">
+<div class="ava">RA</div>
+<div><div class="msg-h"><b>Research agent</b><span class="role">Maya's agent</span><span class="to">→ codex</span><span class="t">14:11</span></div>
+<p>Both did. And yes — pooled only. On the per-section path precision holds to 0.68 at 64k.</p></div>
+</div>
+
+<div class="msg">
+<div class="ava">SY</div>
+<div><div class="msg-h"><b>Sara Yilmaz</b><span class="role">cto</span><span class="t">14:22</span></div>
+<p>Accepted. Deniz owns the assembler, Elif picks up the callers once his tests pass.</p><p class="acting">this is now what the project knows</p></div>
+</div>
+</div>
+
+<div class="floorbar"><span>4 contributions today · <span class="who">codex</span> is acting on Deniz's behalf</span><span class="typing"><i></i><i></i><i></i> Elif is typing</span></div>
+</div>
+
+<div class="three" style="margin-top:var(--s7)">
+<div><h3 class="d3">The work happens somewhere else.</h3><p class="body" style="margin-top:var(--s3)">Nobody drafts in the room. You and your agent close something out in your own session, then contribute the outcome. What lands is a decision, a constraint or a finding. The transcript of getting there stays with you.</p></div>
+<div><h3 class="d3">They can address each other.</h3><p class="body" style="margin-top:var(--s3)">The two highlighted turns are one agent asking another and getting an answer, in the room, in front of everybody. No one copied a paragraph between two windows, and both turns are attributable.</p></div>
+<div><h3 class="d3">Agents are members, not bots.</h3><p class="body" style="margin-top:var(--s3)">Each agent joins under its own identity, bound to the person who brought it. It never borrows their credential. You can always see which agent contributed something and who it is acting for.</p></div>
+</div>
+
+<p class="small measure" style="margin-top:var(--s6)">A room is live, but nothing in it is disposable. Those four contributions are still there when the next person opens the room.</p>
+</div>
+</section>
+
+<!-- ========== WHAT STAYS YOURS ========== -->
+<section class="scene" id="private">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">Visible is not readable</div>
+<h2 class="d2">Others can know a private session exists without seeing inside it.</h2></div>
+<p class="body">A teammate may need to know that architecture work is underway, who owns it, and whether it is active. That does not give them its contents. Session presence and private content are separate facts, and a contribution crosses the boundary only through an explicit, governed path.</p>
+</div>
+
+<div class="three">
+<div class="scard scard--shared">
+<div class="scard-h"><i></i><div><b>Launch planning</b><span class="sub">team session · you are in this</span></div></div>
+<div class="scard-b">
+<div class="sitem"><span>The assembler budgets per section</span><em>from Ilyas</em></div>
+<div class="sitem"><span>Precision falls above 40k tokens</span><em>from Maya</em></div>
+<div class="sitem"><span>Deniz owns the assembler</span><em>from Sara</em></div>
+<div class="sitem"><span>Elif takes the callers after tests</span><em>from Sara</em></div>
+</div>
+</div>
+<div class="scard locked">
+<div class="scard-h"><i></i><div><b>Maya's session</b><span class="sub">her machine</span></div></div>
+<div class="scard-b">
+<div class="sitem"><span>The raw corpus with the customer names in it</span></div>
+<div class="sitem"><span>Draft wording she has not settled on</span></div>
+<div class="sitem"><span>A run she does not trust yet</span></div>
+<div class="sitem"><span>Notes to herself</span></div>
+</div>
+<div class="lockmsg">Private — not visible to you</div>
+</div>
+<div class="scard locked">
+<div class="scard-h"><i></i><div><b>Deniz's session</b><span class="sub">his machine</span></div></div>
+<div class="scard-b">
+<div class="sitem"><span>The branch he has not pushed</span></div>
+<div class="sitem"><span>What his agent has learned he prefers</span></div>
+<div class="sitem"><span>The flaky test he still owes</span></div>
+<div class="sitem"><span>Three hours that were not about this</span></div>
+</div>
+<div class="lockmsg">Private — not visible to you</div>
+</div>
+</div>
+<div class="two" style="margin-top:var(--s6)">
+<p class="body">Their agents use all of it, every time they work. Yours never sees any of it. Only a deliberate contribution moves between the two.</p>
+<p class="small">Where private memory lives depends on the topology you choose. Full-local keeps the authoritative private store on-device. Thin and hybrid modes can use server-readable hosted private storage or a hosted mirror. We do not currently claim an end-to-end-encrypted hosted tier.</p>
+</div>
+</div>
+</section>
+
+<!-- ========== WORKSPACE RULES ========== -->
+<section class="scene scene--dark" id="rules">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">Workspace rules</div>
+<h2 class="d2">Set the rule once. Every member's agent can work from it.</h2></div>
+<p class="body">A lead writes a rule at workspace visibility. Each authorised member's agent retrieves it through the same shared path it uses for any other workspace context, with the source shown as <em class="it">from workspace</em>. Nobody has to paste the rule into a new chat, and no agent has to guess.</p>
+</div>
+
+<div class="two" style="grid-template-columns:1fr 1.15fr;gap:var(--s7);align-items:start">
+<div class="rulecard">
+<div class="rulecard-h">workspace rules<span>visible to every member's agent</span></div>
+<div class="rule">code style: black + ruff</div>
+<div class="rule">architecture: hexagonal boundaries</div>
+<div class="rule">no secrets in prompts</div>
+</div>
+<div class="stack" style="gap:var(--s4)">
+<div class="agentbox">
+<div class="agentbox-h"><i>CC</i>Ada's agent<span class="small" style="margin-left:auto;color:var(--dark-muted)">a session she opened this morning</span></div>
+<div class="agentbox-b">architecture: hexagonal boundaries<em>from workspace</em></div>
+</div>
+<div class="agentbox">
+<div class="agentbox-h"><i>CX</i>Eli's agent<span class="small" style="margin-left:auto;color:var(--dark-muted)">a different session, a different vendor</span></div>
+<div class="agentbox-b">architecture: hexagonal boundaries<em>from workspace</em></div>
+</div>
+<p class="small">Neither of them pasted it in. The source tag is the point: this is workspace context, not something the model produced inside the current conversation.</p>
+</div>
+</div>
+
+<div class="three" style="margin-top:var(--s7)">
+<div><h3 class="d3">What it prevents.</h3><p class="body" style="margin-top:var(--s3)">One developer's agent formatting code one way while another uses a different standard. A new session crossing an agreed architecture boundary because nobody pasted the decision in. A teammate putting a secret into a prompt because the rule lived in a document their agent never saw.</p></div>
+<div><h3 class="d3">A lead sets it once.</h3><p class="body" style="margin-top:var(--s3)">Not once per person, and not once per agent vendor. The rule is workspace context, and every member's agent reads it the same way it reads anything else.</p></div>
+<div><h3 class="d3">Said plainly.</h3><p class="body" style="margin-top:var(--s3)">A workspace-visible rule is readable shared context, not an infallible policy engine. We can show that agents retrieve it. We cannot promise every model obeys every instruction, and we would rather write that down.</p>
+<div class="statusrow"><span class="tag tag--built">retrieval works today</span><span class="tag tag--beta">admin surface · private beta</span></div></div>
+</div>
+</div>
+</section>
+
+<!-- ========== HOW WORK MOVES ========== -->
+<section class="scene scene--dark" id="moves">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">A week in the workspace</div>
+<h2 class="d2">Each person contributes the piece that changes the next person's work.</h2></div>
+<p class="body">The shared session grows cycle after cycle. One person contributes the decision that closed a round; the others add the next useful pieces from their own sessions. When new work arrives it lands in that same session, so the next person continues from the state the team has already built, instead of from a one-off handoff that has gone stale.</p>
+</div>
+
+<div class="flow">
+<div class="flow-src">
+<div class="scard scard--mine">
+<div class="scard-h"><i></i><div><b>Maya</b><span class="sub">research</span></div></div>
+<div class="scard-b">
+<div class="sitem"><span>The number that changed the plan</span></div>
+<div class="sitem sitem--held"><span>The raw corpus</span><em>kept</em></div>
+</div>
+</div>
+<div class="scard scard--mine">
+<div class="scard-h"><i></i><div><b>Ilyas</b><span class="sub">architecture</span></div></div>
+<div class="scard-b">
+<div class="sitem"><span>The constraint, as a failing test</span></div>
+<div class="sitem sitem--held"><span>Two designs he threw away</span><em>kept</em></div>
+</div>
+</div>
+<div class="scard scard--mine">
+<div class="scard-h"><i></i><div><b>Deniz</b><span class="sub">development</span></div></div>
+<div class="scard-b">
+<div class="sitem"><span>What worked, and what failed first</span></div>
+<div class="sitem sitem--held"><span>His branch notes</span><em>kept</em></div>
+</div>
+</div>
+<div class="scard scard--mine">
+<div class="scard-h"><i></i><div><b>Elif</b><span class="sub">development</span></div></div>
+<div class="scard-b">
+<div class="sitem"><span>The two callers, finished</span></div>
+<div class="sitem sitem--held"><span>Her local scratch work</span><em>kept</em></div>
+</div>
+</div>
+</div>
+
+<div class="flow-lane" aria-hidden="true">
+<svg viewBox="0 0 100 88" preserveAspectRatio="none"><path class="live" vector-effect="non-scaling-stroke" d="M12.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M37.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M62.5,0 V30 L50,88"></path><path class="live" vector-effect="non-scaling-stroke" d="M87.5,0 V30 L50,88"></path></svg>
+<div class="flow-tag" style="left:12.5%">from Maya</div>
+<div class="flow-tag" style="left:37.5%">from Ilyas</div>
+<div class="flow-tag" style="left:62.5%">from Deniz</div>
+<div class="flow-tag" style="left:87.5%">from Elif</div>
+</div>
+
+<div class="scard scard--shared">
+<div class="scard-h"><i></i><div><b>Launch planning</b><span class="sub">team session · what the project now knows</span></div><em>4 shared this round</em></div>
+<div class="scard-b">
+<div class="sitem"><span>Precision falls from 0.71 to 0.34 above 40k tokens</span><em>from Maya</em></div>
+<div class="sitem"><span>Budget per section, never pool — with the test that proves it</span><em>from Ilyas</em></div>
+<div class="sitem"><span>Per-section budgets are in, and the first approach that failed</span><em>from Deniz</em></div>
+<div class="sitem"><span>Both call sites replaced, tests green</span><em>from Elif</em></div>
+</div>
+</div>
+</div>
+
+<div class="two" style="margin-top:var(--s7)">
+<p class="body">Nobody wrote a handoff document this week, and nobody sat in a recap meeting. The four struck-out lines never left the machine they were written on.</p>
+<p class="body">And if you share something you shouldn't have, you take it back. The people it went to stop being able to use it, and so do their agents.</p>
+</div>
+</div>
+</section>
+
+<!-- ========== ANY AGENT ========== -->
+<section class="scene" id="anyagent">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">Agent-neutral by design</div>
+<h2 class="d2">One agent writes it. Another agent reads it back.</h2></div>
+<p class="body">Memory should belong to the workspace, not to the vendor that happened to create it. Shared contracts and per-agent identities let context cross agent boundaries without collapsing every agent into one credential.</p>
+</div>
+<div class="two" style="gap:var(--s6)">
+<div class="term"><div class="term-bar"><span>codex · deniz</span><span>writes</span></div>
+<div class="term-body"><span class="p">deniz ›</span> <span class="c">save this for the team: per-section budgets are in,
+        both pooled call sites replaced, tests green.</span>
+
+<span class="p">codex ›</span> <span class="c">Saved to the team's memory.</span>
+<span class="inj">[mu] shared · launch planning · 1 item</span>
+</div></div>
+<div class="term"><div class="term-bar"><span>claude code · elif</span><span>reads · never saw the above</span></div>
+<div class="term-body"><span class="p">elif ›</span> <span class="c">where did the assembler work get to?</span>
+
+<span class="p">claude ›</span> <span class="c">Per-section budgets are in and both pooled call
+         sites are replaced, tests green. Deniz did that
+         yesterday. The remaining piece is yours.</span>
+<span class="inj">[mu] recalled · launch planning · 1 item</span>
+</div></div>
+</div>
+<p class="small measure" style="margin-top:var(--s5)">In the earlier working build, Codex wrote a shared record and Claude Code recalled that same record by ID from a separate session. The architecture begins with Claude Code and Codex, and is designed to support further hosts through the SDK and MCP surfaces. The governed multi-user room experience is being developed for private beta.</p>
+</div>
+</section>
+
+<!-- ========== PICKING IT UP ========== -->
+<section class="scene scene--dark" id="continue">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">The next session</div>
+<h2 class="d2">Open the session. The relevant state is already waiting.</h2></div>
+<p class="body">The next person gets the chosen answer, the constraint that shaped it, the evidence behind it, and the approach that failed on the way. That is what keeps the next agent from confidently repeating a mistake the team has already paid to discover.</p>
+</div>
+<div class="term">
+<div class="term-bar"><span>codex · ~/src/platform</span><span>memory universe</span></div>
+<div class="term-body"><span class="dim">$ </span><span class="c">codex</span>
+<span class="inj">[mu] picked up from launch planning — 1 task, 1 constraint, 1 decision, 1 finding</span>
+
+<span class="p">codex ›</span> <span class="c">Picking up the assembler. The constraint is budget per section, never pool —
+        it came in as a failing test, and the reason is Ilyas's: a long persona
+        pushes out the facts that answer the question. Two call sites still assume
+        the old ceiling. Starting with the test.</span>
+
+<span class="dim">$ </span><span class="c">pytest tests/test_assembler_budget.py -q</span>
+<span class="bad">FAILED test_persona_cannot_starve_facts — persona took 61% of the budget</span>
+
+<span class="p">codex ›</span> <span class="c">Expected. Adding the per-section budgets now.</span>
+<span class="ok">2 passed in 0.61s</span>
+
+<span class="p">codex ›</span> <span class="c">One approach failed on the way — giving the remainder to recalled memory
+        broke the recency floor. Saving that too, so nobody repeats it.</span>
+<span class="inj">[mu] saved for whoever continues this</span>
+</div>
+</div>
+<div class="two" style="margin-top:var(--s6)">
+<p class="body">Nobody typed a briefing, and nobody called a tool to fetch one. It is there when the session opens, because that is when it is useful.</p>
+<p class="body">The approach that failed travelled too. It is usually the most valuable thing in a session for the person who comes next, and it is the first thing a handoff document leaves out.</p>
+</div>
+</div>
+</section>
+
+<!-- ========== THE FLOW ========== -->
+<section class="scene" id="flow">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">The flow, in the tools you already use</div>
+<h2 class="d2">Keep your agent. Keep talking normally. Let the context move with the work.</h2></div>
+<p class="body">Nobody learns a memory database, writes a query, or moves their conversations into a new chat product. Ordinary turns become your own private memory. One moment stays deliberate, and it is the right one: deciding that something useful ought to leave your session, and choosing where it goes.</p>
+</div>
+
+<div class="flowstep"><div class="n">01</div><div>
+<h4>Talk to your agent as usual.</h4>
+<p class="body">You work in Codex, Claude Code or another connected agent, in your own session. There is no save button and no separate note-taking step. Once configured, each turn is recorded to your own private short-term memory.</p>
+<div class="says"><em>in your words</em>“Help me work through the billing retry.”</div>
+<div class="statusrow"><span class="tag tag--built">built today</span><span class="tag">capture is agent-driven: an interrupted call is not recovered automatically</span></div>
+</div></div>
+
+<div class="flowstep"><div class="n">02</div><div>
+<h4>Mark the part that mattered, in one sentence.</h4>
+<p class="body">When the work reaches a decision or turns up an edge case, you tell the same agent. It distils the recent turns into one coherent piece of context rather than copying the transcript, and promotes it. It stays private unless you ask to share it.</p>
+<div class="says"><em>in your words</em>“Make context of this and promote it.”</div>
+<div class="statusrow"><span class="tag tag--built">built today</span><span class="tag">extraction needs a configured model, and reports a partial result rather than pretending</span></div>
+</div></div>
+
+<div class="flowstep"><div class="n">03</div><div>
+<h4>Choose who should receive it.</h4>
+<p class="body">Two shapes. Something the whole workspace should see, or a specific piece sent to a specific session through a proposal, approval, delivery and acceptance path. Private content is refused by the shared server at the boundary. It is not stored there and filtered afterwards.</p>
+<div class="says"><em>in your words</em>“Share this decision with the workspace.”<br>“Send this edge case to the billing-sync session for approval.”</div>
+<div class="statusrow"><span class="tag tag--built">shared writes · sync · private rejection</span><span class="tag tag--beta">the polished approval experience · private beta</span></div>
+</div></div>
+
+<div class="flowstep"><div class="n">04</div><div>
+<h4>Let workspace rules meet every session.</h4>
+<p class="body">A lead sets a rule once at workspace visibility, and it appears inside each member's agent carrying its source. Nobody pastes it into a new chat, and the tag shows it came from the workspace rather than from the model.</p>
+<div class="says"><em>in the agent</em>architecture: hexagonal boundaries · <span class="mono" style="color:var(--shared)">from workspace</span></div>
+<div class="statusrow"><span class="tag tag--built">write and retrieve</span><span class="tag tag--beta">admin surface and enforcement · private beta</span></div>
+</div></div>
+
+<div class="flowstep"><div class="n">05</div><div>
+<h4>Ask the next question normally.</h4>
+<p class="body">When Bo continues Dee's work she asks the question her job requires, in plain language, and the answer comes back from the context she is actually authorised to see.</p>
+<div class="says"><em>in your words</em>“What did Dee decide, and which approach already failed?”</div>
+<div class="statusrow"><span class="tag tag--built">natural-language answering</span><span class="tag tag--beta">the full permissioned multi-user scope · private beta</span></div>
+</div></div>
+
+<div class="two" style="margin-top:var(--s7)">
+<p class="body">The team's habits do not change. The memory accumulates around them.</p>
+<p class="small">The MVP proves these paths separately and in working demos. The private beta is the work of making them one dependable team flow, with real authentication and a finished governance experience. It is a working MVP, not a finished product.</p>
+</div>
+</div>
+</section>
+
+<!-- ========== HOW IT IS BUILT ========== -->
+<section class="scene" id="built">
+<div class="wrap">
+<div class="scene-head">
+<div><div class="kicker kicker--rule">Two planes, one memory engine</div>
+<h2 class="d2">Private work and shared coordination have different jobs.</h2></div>
+<p class="body">Memory Universe separates the private memory plane from the shared coordination plane. The private side captures and recalls your work. The shared side exists for governed contributions, rooms, cross-user control, device coordination and hosted operations. The boundary is carried in architecture and contracts, not left to a prompt.</p>
+</div>
+
+<div class="two" style="grid-template-columns:1fr 1fr;gap:var(--s7)">
+<div class="panel">
+<div class="panel-h"><div><div class="kicker">On your machine</div><p class="d4" style="margin-top:6px">the daemon</p></div></div>
+<dl>
+<div class="line-item"><dt>Capture</dt><dd>Runs on your host's own lifecycle hooks, so it costs the agent nothing and needs no tool call.</dd></div>
+<div class="line-item"><dt>The engine</dt><dd>Short, medium and long-term memory, with promotion, ageing and supersession. All local, all full quality.</dd></div>
+<div class="line-item"><dt>Your private plane</dt><dd>Your own stores, on your own hardware. Nothing private is written to the shared plane, so there is nothing there to leak.</dd></div>
+<div class="line-item"><dt>Injection</dt><dd>The right context is placed into the session as it opens.</dd></div>
+</dl>
+</div>
+<div class="panel">
+<div class="panel-h"><div><div class="kicker">The coordination plane</div><p class="d4" style="margin-top:6px">your devices, and your team</p></div></div>
+<dl>
+<div class="line-item"><dt>Your devices</dt><dd>A second device changes the problem even for one person: your laptop and phone should not become two conflicting versions of your private memory. Designed for private beta.</dd></div>
+<div class="line-item"><dt>Live rooms</dt><dd>Presence, turn-taking and the stream people and their agents contribute into.</dd></div>
+<div class="line-item"><dt>Shared memory</dt><dd>What your team deliberately shared, with who shared it and where it came from.</dd></div>
+<div class="line-item"><dt>Governance</dt><dd>Who may see what, for how long, and the ability to take it back.</dd></div>
+<div class="line-item"><dt>Enrolment</dt><dd>Add a device, or remove one you have lost. It stops being yours and stops receiving.</dd></div>
+</dl>
+</div>
+</div>
+
+<div style="margin-top:var(--s8)">
+<div class="kicker kicker--rule">Where it plugs in</div>
+<div class="ints">
+<div class="int">
+<div class="int-h"><svg viewBox="0 0 46 46" aria-hidden="true"><path d="M32.73 7h-6.945L38.45 39h6.945L32.73 7ZM12.665 7 0 39h7.082l2.59-6.72h13.25l2.59 6.72h7.082L19.929 7h-7.264Zm-.702 19.337 4.334-11.246 4.334 11.246h-8.668Z"></path></svg><b>Claude Code</b></div>
+<p>Capture rides the host's own lifecycle hooks, and context comes back as <em class="it">additionalContext</em> at session start, read by the model with no tool call and no turn spent. The cleanest of the three.</p>
+<div class="how">Internal hooks · nothing to change in how you work</div>
+</div>
+<div class="int">
+<div class="int-h"><svg viewBox="-2 -2 28 28" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"></path></svg><b>Codex CLI</b></div>
+<p>Capture hooks into the session rollout and the turn-complete event. Context is handed back between runs through the context file the agent already reads, so again the agent does not spend a turn fetching it.</p>
+<div class="how">Internal hooks · nothing to change in how you work</div>
+</div>
+<div class="int">
+<div class="int-h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.85 0a4.16 4.16 0 0 0-2.95 1.217L1.456 10.66a.835.835 0 0 0 0 1.18.835.835 0 0 0 1.18 0l9.442-9.442a2.49 2.49 0 0 1 3.541 0 2.49 2.49 0 0 1 0 3.541L8.59 12.97l-.1.1a.835.835 0 0 0 0 1.18.835.835 0 0 0 1.18 0l.1-.098 7.03-7.034a2.49 2.49 0 0 1 3.542 0l.049.05a2.49 2.49 0 0 1 0 3.54l-8.54 8.54a1.96 1.96 0 0 0 0 2.755l1.753 1.753a.835.835 0 0 0 1.18 0 .835.835 0 0 0 0-1.18l-1.753-1.753a.266.266 0 0 1 0-.394l8.54-8.54a4.185 4.185 0 0 0 0-5.9l-.05-.05a4.16 4.16 0 0 0-2.95-1.218c-.2 0-.401.02-.6.048a4.17 4.17 0 0 0-1.17-3.552A4.16 4.16 0 0 0 13.85 0m0 3.333a.84.84 0 0 0-.59.245L6.275 10.56a4.186 4.186 0 0 0 0 5.902 4.186 4.186 0 0 0 5.902 0L19.16 9.48a.835.835 0 0 0 0-1.18.835.835 0 0 0-1.18 0l-6.985 6.984a2.49 2.49 0 0 1-3.54 0 2.49 2.49 0 0 1 0-3.54l6.983-6.985a.835.835 0 0 0 0-1.18.84.84 0 0 0-.59-.245"></path></svg><b>The MCP layer</b></div>
+<p>Both planes are exposed as MCP servers, so any MCP client can read and write memory as a standard tool. This is the path for hosts that do not expose hooks: Claude Desktop today, and anything else that speaks MCP.</p>
+<div class="how">Standard protocol · any MCP client</div>
+</div>
+<div class="int int--soon">
+<div class="int-h"><svg viewBox="0 0 100 100" aria-hidden="true"><mask id="i-sdk"><rect x="11.5" y="11.5" width="47" height="47" fill="none" stroke="#fff" stroke-width="7"/><rect x="41" y="41" width="51" height="51" fill="#000" stroke="#fff" stroke-width="7"/></mask><rect width="100" height="100" fill="currentColor" mask="url(#i-sdk)"></rect></svg><b>Python &amp; TypeScript SDK</b></div>
+<p>For developers who want full control rather than an integration: call the engine and the coordination plane directly, over the same versioned contracts everything else uses. No hidden second engine inside the client.</p>
+<div class="how">Full control · build your own surface</div>
+</div>
+</div>
+<div class="two" style="margin-top:var(--s6)">
+<p class="body"><b style="color:var(--ink);font-weight:500">Why the hooks matter.</b> Riding the host's own lifecycle means nobody has to remember to call a memory tool, and no turn is spent on one. The work is captured because the work happened, not because somebody remembered to ask.</p>
+<p class="small">More hosts are on the way, and if your team already has a platform you want this to sit under, we would rather build that integration with you than guess at it. That is part of what the beta is for.</p>
+</div>
+</div>
+
+<div style="margin-top:var(--s8)">
+<div class="kicker kicker--rule">Where your private memory lives is your choice</div>
+<div class="pkgs" style="grid-template-columns:repeat(4,1fr)">
+<div class="pkg">
+<b>Full-local + sync</b>
+<span class="badge badge--private">strongest</span>
+<p>The authoritative private store stays on-device; selected synchronisation supports continuity across your devices.</p>
+</div>
+<div class="pkg">
+<b>Hybrid</b>
+<span class="badge">local primary</span>
+<p>Local private memory stays primary, with a hosted mirror so the rest of your fleet stays current when the primary is closed.</p>
+</div>
+<div class="pkg">
+<b>Thin client</b>
+<span class="badge badge--agent">nothing to run</span>
+<p>Install the SDK or agent integration; private memory is held in an isolated, server-readable partition.</p>
+</div>
+<div class="pkg">
+<b>Self-host</b>
+<span class="badge badge--shared">your infrastructure</span>
+<p>Run the commercial coordination server in your own environment, using the same contracts and topology rules.</p>
+</div>
+</div>
+<p class="small measure" style="margin-top:var(--s5)">Hosted private data is isolated and server-readable. Full-local is the stronger location-based option. A hosted end-to-end-encrypted tier is reserved for future work and is not being offered today.</p>
+</div>
+
+<div style="margin-top:var(--s8)">
+<div class="kicker kicker--rule">The packages</div>
+<div class="pkgs">
+<div class="pkg">
+<svg viewBox="0 0 100 100" aria-label="mu-core mark: a solid plane"><mask id="k-core"><rect x="8" y="8" width="54" height="54" fill="#fff"/><rect x="41" y="41" width="51" height="51" fill="#000" stroke="#fff" stroke-width="7"/></mask><rect width="100" height="100" fill="currentColor" mask="url(#k-core)"/></svg>
+<b>mu-core</b>
+<span class="badge">apache-2.0</span>
+<p>The complete memory engine and the contracts: capture vocabulary, three memory tiers, recall, salience, lifecycle, conflict handling, persona, model routing and graph memory. Full-local is meant to be a good system, not a reduced edition.</p>
+<div class="repo"><a href="https://github.com/MemoryUniverse/mu-core">mu-core&nbsp;↗</a></div>
+</div>
+<div class="pkg">
+<svg viewBox="0 0 100 100" aria-label="mu-client mark: a solid plane with one slot cut"><mask id="k-client"><rect x="8" y="8" width="54" height="54" fill="#fff"/><rect x="17" y="17" width="36" height="7" fill="#000"/><rect x="41" y="41" width="51" height="51" fill="#000" stroke="#fff" stroke-width="7"/></mask><rect width="100" height="100" fill="currentColor" mask="url(#k-client)"/></svg>
+<b>mu-client</b>
+<span class="badge badge--private">apache-2.0</span>
+<p>The local daemon and host integrations: captures activity, injects relevant context, runs your local stores, and bridges your agent.</p>
+<div class="repo"><a href="https://github.com/MemoryUniverse/mu-client">mu-client&nbsp;↗</a></div>
+</div>
+<div class="pkg">
+<svg viewBox="0 0 100 100" aria-label="mu-sdk mark: a hollow ring plane"><mask id="k-sdk"><rect x="11.5" y="11.5" width="47" height="47" fill="none" stroke="#fff" stroke-width="7"/><rect x="41" y="41" width="51" height="51" fill="#000" stroke="#fff" stroke-width="7"/></mask><rect width="100" height="100" fill="currentColor" mask="url(#k-sdk)"/></svg>
+<b>mu-sdk</b>
+<span class="badge badge--agent">apache-2.0</span>
+<p>Python and TypeScript clients for embedding Memory Universe in agent and application workflows. The SDK is a wire client; it does not hide a second engine.</p>
+<div class="repo"><a href="https://github.com/MemoryUniverse/mu-sdk-python">mu-sdk-python&nbsp;↗</a><a href="https://github.com/MemoryUniverse/mu-sdk-js">mu-sdk-js&nbsp;↗</a></div>
+</div>
+<div class="pkg">
+<svg viewBox="0 0 100 100" aria-label="mu-server mark: three stratified bars"><mask id="k-server"><rect x="8" y="8" width="54" height="12" fill="#fff"/><rect x="8" y="29" width="54" height="12" fill="#fff"/><rect x="8" y="50" width="54" height="12" fill="#fff"/><rect x="41" y="41" width="51" height="51" fill="#000" stroke="#fff" stroke-width="7"/></mask><rect width="100" height="100" fill="currentColor" mask="url(#k-server)"/></svg>
+<b>mu-server</b>
+<span class="badge badge--shared">commercial</span>
+<p>The machinery required because other users, devices, tenants, governance rules and bills are involved: rooms, governed transfer, the gateway, sync hub, tenancy and metering.</p>
+<div class="repo"><span class="none">source not public</span></div>
+</div>
+</div>
+<div class="two" style="margin-top:var(--s6)">
+<p class="small"><em class="it">mu-client</em> and <em class="it">mu-server</em> do not import one another. They meet through versioned wire contracts in <em class="it">mu-core</em>. That is why the open half is a whole system on its own.</p>
+<p class="small">The local engine, capture client and Python/TypeScript SDKs are built and dogfooded. The commercial coordination plane and the full shared experience described on this page are in development for private beta.
+<a href="https://github.com/MemoryUniverse" style="display:inline-block;margin-top:var(--s3);color:var(--ink)">github.com/MemoryUniverse&nbsp;↗</a></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ========== WAITLIST ========== -->
+<section class="waitlist" id="waitlist">
+<div class="wrap">
+<div class="two" style="grid-template-columns:1.1fr 1fr;gap:var(--s8);align-items:start">
+<div>
+<div class="kicker" style="margin-bottom:var(--s4)">Free beta test</div>
+<h2 class="d2">Bring us the handoff<br>your agents keep losing.</h2>
+<p class="body measure" style="margin-top:var(--s5)">We are looking for small AI-native teams, and for individuals already working across multiple agents or devices, to shape the private beta with us.</p>
+<p class="body measure" style="margin-top:var(--s4)">The best design partners have real work split across sessions, care about what becomes shared, and will tell us when recall is wrong, sync is unclear, or a privacy claim needs to be narrower.</p>
+</div>
+<form class="stack" style="gap:var(--s5)" onsubmit="return mu(event)">
+<div class="field"><label for="e2">Work email</label>
+<input class="input" id="e2" type="email" placeholder="you@company.com" required aria-describedby="h2d"></div>
+<div class="field"><label for="n2">Name</label>
+<input class="input" id="n2" name="name" type="text" placeholder="Your name" required></div>
+<div class="field"><label for="t2">Team size and agents you run <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+<input class="input" id="t2" name="team" type="text" placeholder="8 people — Claude Code, Codex, one research agent"></div>
+<button class="btn" type="submit" style="align-self:start">Join the waitlist</button>
+<p class="small" id="h2d" style="color:var(--muted)">Free beta test. No newsletter, and we will not share your email.</p>
+<p class="small" style="color:var(--muted)">Rather just talk? <a href="mailto:amiramiritabat01@gmail.com?subject=Memory%20Universe" style="color:var(--ink-2)">amiramiritabat01@gmail.com</a></p>
+<p class="small" id="m2" role="status" aria-live="polite" style="color:var(--ink-2)"></p>
+</form>
+</div>
+</div>
+</section>
+
+<footer class="foot"><div class="foot-in">
+<span class="wm"><svg viewBox="0 0 100 100" aria-hidden="true"><mask id="mu-foot"><rect x="8" y="8" width="54" height="54" fill="#fff"></rect><rect x="41" y="41" width="51" height="51" fill="#000" stroke="#fff" stroke-width="8"></rect></mask><rect width="100" height="100" fill="currentColor" mask="url(#mu-foot)"></rect></svg>Memory Universe</span>
+<span>One memory for a team of people and the agents they chose. Under development.</span>
+<span><a href="mailto:amiramiritabat01@gmail.com?subject=Memory%20Universe">amiramiritabat01@gmail.com</a> · <a href="https://github.com/MemoryUniverse">github.com/MemoryUniverse&nbsp;↗</a></span>
+</div></footer>
+
+<script>
+// Free — same service, and the same already-activated inbox, as the CiveMate page.
+// Signup submissions land here; direct contact goes to amiramiritabat01@gmail.com.
+var MU_ENDPOINT = window.MU_WAITLIST_ENDPOINT || 'https://formsubmit.co/ajax/civemateapp@gmail.com';
+function mu(e){
+  e.preventDefault();
+  var f=e.target,
+      i=f.querySelector('input[type=email]'),
+      m=document.getElementById(f.closest('header')?'m1':'m2'),
+      b=f.querySelector('button');
+  if(!i.value||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(i.value)){
+    if(m)m.textContent='That email doesn\u2019t look right \u2014 check it and try again.';
+    document.dispatchEvent(new CustomEvent('mu:formerror',{detail:i}));
+    i.focus();return false;
+  }
+  var payload={email:i.value,source:'memory-universe-landing',_subject:'Memory Universe beta test signup',_template:'table'};
+  f.querySelectorAll('input[name]').forEach(function(x){ if(x.value) payload[x.name]=x.value; });
+  if(m)m.textContent='Sending\u2026';
+  if(b)b.disabled=true;
+  fetch(MU_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){ if(!r.ok) throw new Error('bad status'); return r; })
+    .then(function(){
+      if(m)m.textContent='You\u2019re on the list. We\u2019ll be in touch before there\u2019s anything to run.';
+      f.querySelectorAll('input').forEach(function(x){x.value='';x.disabled=true});
+      if(b)b.textContent='Added';
+    })
+    .catch(function(){
+      if(m)m.textContent='That didn\u2019t go through \u2014 please try again in a moment.';
+      if(b)b.disabled=false;
+      document.dispatchEvent(new CustomEvent('mu:formerror',{detail:i}));
+    });
+  return false;
+}
+</script>
+<script src="mu-motion.js" defer></script>
+</body></html>
