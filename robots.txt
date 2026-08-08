@@ -32,3 +32,4 @@ User-agent: meta-externalagent
 Allow: /
 
 Sitemap: https://memoryuniverse.github.io/sitemap.xml
+Sitemap: https://memoryuniverse.github.io/landing/sitemap.xml
